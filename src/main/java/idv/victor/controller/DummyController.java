@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class DummyController {
     @RequestMapping(value = "page1",method = {RequestMethod.GET,RequestMethod.POST})
     public String page1 (){
-        return "" ;
+        return "dummyPage" ;
     }
 }
