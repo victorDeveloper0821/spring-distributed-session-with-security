@@ -1,10 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/all.min.css}"/>
+    <script th:src="@{/jquery.min.js}"></script>
+    <script th:src="@{/bootstrap.bundle.min.js}"></script>
+    <title>首頁</title>
 </head>
 <body>
+<nav class="navbar navbar-light bg-light">
 
+    <a class="navbar-brand" href="#">
+        <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg"
+             width="30" height="30" class="d-inline-block align-top" alt="">
+        測試首頁
+    </a>
+    <!-- hamburger here -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- menu list here -->
+    <div class="navbar-collapse collapse show" id="navbarNav" style="">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/dummy/page1}">Dummy Data Page</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/auth/loginPage}">LoginPage</a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            超級簡單的
+        </div>
+        <div class="col-md-5">
+            首頁
+        </div>
+    </div>
+</div>
 </body>
 </html>
