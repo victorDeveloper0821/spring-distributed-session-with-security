@@ -1,9 +1,12 @@
 package idv.victor.config;
 
+import idv.victor.security.CustomUserDetailsService;
+import idv.victor.security.CustomUserProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -22,6 +25,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    /**
+     * AuthenticationProvider
+     */
+    private AuthenticationProvider userProvider;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -35,9 +43,22 @@ public class SecurityConfig {
      */
     @Bean
     @ConditionalOnProperty(name = "api.env", havingValue = "local")
-    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+    public AuthenticationManager localAuthenticationManager(HttpSecurity http) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class).userDetailsService(inMemoryDetailService())
-                .passwordEncoder(passwordEncoder()).and().build();
+                .passwordEncoder(passwordEncoder()).and().authenticationProvider(userProvider).build();
+    }
+
+    /**
+     * 設定 dataSource 時使用 inMemory 的 UserDetailsService
+     * @param http
+     * @return
+     * @throws Exception
+     */
+    @Bean
+    @ConditionalOnProperty(name = "api.env", havingValue = "datasource")
+    public AuthenticationManager DataAuthenticationManager(HttpSecurity http) throws Exception {
+        return http.getSharedObject(AuthenticationManagerBuilder.class).userDetailsService(new CustomUserDetailsService())
+                   .passwordEncoder(passwordEncoder()).and().authenticationProvider(userProvider).build();
     }
 
     /**
@@ -68,6 +89,7 @@ public class SecurityConfig {
      * @return
      */
     @Bean
+    @ConditionalOnProperty(name = "api.env", havingValue = "local")
     public UserDetailsService inMemoryDetailService(){
         UserDetails user = User.builder()
                                .username("user")
