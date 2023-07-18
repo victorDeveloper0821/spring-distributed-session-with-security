@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
-    @RequestMapping(value="/loginPage",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
     public String loginPage(@RequestParam(value = "error",required = false)String error){
         return "loginPage" ;
     }
