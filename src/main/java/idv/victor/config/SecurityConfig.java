@@ -1,7 +1,6 @@
 package idv.victor.config;
 
 import idv.victor.security.CustomUserDetailsService;
-import idv.victor.security.CustomUserProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
