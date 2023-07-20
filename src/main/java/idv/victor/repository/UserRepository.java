@@ -1,6 +1,6 @@
 package idv.victor.repository;
 
-import idv.victor.web.auth.domain.dto.entity.User;
+import idv.victor.web.auth.domain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

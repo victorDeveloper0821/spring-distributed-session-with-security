@@ -1,5 +1,7 @@
 package idv.victor.web.exception;
 
+import idv.victor.web.enums.ErrorCodeEnum;
+
 /**
  * 提供自定義的例外處理
  */
@@ -22,6 +24,12 @@ public class BussinessException extends Exception{
      */
     public BussinessException(String errcode, String errMsg) {
         super(String.format("[%s] %s",errcode, errMsg));
+        this.errcode = errcode;
+        this.errMsg = errMsg;
+    }
+
+    public BussinessException (ErrorCodeEnum errorCodeEnum){
+        super(String.format("[%s] %s",errorCodeEnum.getErrorCode(), errorCodeEnum.getErrMsg()));
         this.errcode = errcode;
         this.errMsg = errMsg;
     }

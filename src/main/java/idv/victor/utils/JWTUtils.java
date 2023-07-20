@@ -49,6 +49,20 @@ public class JWTUtils {
         return token;
     }
 
+    public Claims getClaimFromRequest (HttpServletRequest request){
+        String jwtStr = request.getHeader("Authorization").replace("Bearer ","");
+        if(ObjectUtils.isEmpty(jwtStr)){
+            return null;
+        }
+        Claims claims = Jwts.parser()
+                            // 驗證
+                            .setSigningKey(generateSecretKey())
+                            // 去掉 Bearer
+                            .parseClaimsJws(jwtStr)
+                            .getBody();
+        return claims;
+    }
+
     /**
      * 建立 JWT token
      * @param uuid 使用者類型
@@ -58,6 +72,7 @@ public class JWTUtils {
     public String createToken (String uuid, String userId, int expiration){
         HashMap<String, String> claim = new HashMap<>();
         claim.put("userName", userId);
+        claim.put("role",uuid);
         return createToken(claim, uuid, expiration);
     }
 

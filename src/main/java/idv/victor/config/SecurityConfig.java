@@ -1,5 +1,6 @@
 package idv.victor.config;
 
+import idv.victor.security.CustomLogoutFilter;
 import idv.victor.security.CustomUserDetailsService;
 import idv.victor.security.CustomUserProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 
 /**
  * Spring security 設定
@@ -31,6 +33,9 @@ public class SecurityConfig {
      * AuthenticationProvider
      */
     private AuthenticationProvider userProvider;
+
+    @Autowired
+    private CustomLogoutFilter customLogoutFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -56,7 +61,7 @@ public class SecurityConfig {
             .antMatchers("/home/**").permitAll()
             .antMatchers("/auth/**").permitAll()
             .antMatchers("/dummy/**").authenticated()
-            .and();
+            .and().addFilterBefore(customLogoutFilter, LogoutFilter.class);
         return http.build();
     }
 

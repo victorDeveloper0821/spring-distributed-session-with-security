@@ -1,7 +1,7 @@
 package idv.victor.service;
 
 import idv.victor.entity.Dummy;
-import idv.victor.web.auth.domain.dto.entity.User;
+import idv.victor.web.auth.domain.entity.User;
 import idv.victor.repository.DummyRepository;
 import idv.victor.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

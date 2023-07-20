@@ -1,6 +1,6 @@
 package idv.victor.entity;
 
-import idv.victor.web.auth.domain.dto.entity.User;
+import idv.victor.web.auth.domain.entity.User;
 import lombok.Data;
 
 import javax.persistence.*;
