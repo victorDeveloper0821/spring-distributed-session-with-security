@@ -1,4 +1,4 @@
-package idv.victor.entity;
+package idv.victor.web.auth.domain.dto.entity;
 
 import lombok.Data;
 

@@ -1,16 +1,12 @@
-package idv.victor.service;
+package idv.victor.web.auth.service;
 
-import idv.victor.domain.dto.LoginReqDTO;
-import idv.victor.domain.dto.LoginResDTO;
-import idv.victor.security.CustomUserProvider;
+import idv.victor.web.auth.domain.dto.LoginReqDTO;
+import idv.victor.web.auth.domain.dto.LoginResDTO;
 import idv.victor.utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.SpringSecurityCoreVersion;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
