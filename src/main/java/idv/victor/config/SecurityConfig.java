@@ -1,6 +1,8 @@
 package idv.victor.config;
 
 import idv.victor.security.CustomUserDetailsService;
+import idv.victor.security.CustomUserProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +15,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -31,33 +34,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    /**
-     * 設定 local 時使用 inMemory 的 UserDetailsService
-     * @param http
-     * @return
-     * @throws Exception
-     */
-    @Bean
-    @ConditionalOnProperty(name = "api.env", havingValue = "local")
-    public AuthenticationManager localAuthenticationManager(HttpSecurity http) throws Exception {
-        return http.getSharedObject(AuthenticationManagerBuilder.class).userDetailsService(inMemoryDetailService())
-                .passwordEncoder(passwordEncoder()).and().authenticationProvider(userProvider).build();
-    }
-
-    /**
-     * 設定 dataSource 時使用 inMemory 的 UserDetailsService
-     * @param http
-     * @return
-     * @throws Exception
-     */
-    @Bean
-    @ConditionalOnProperty(name = "api.env", havingValue = "datasource")
-    public AuthenticationManager DataAuthenticationManager(HttpSecurity http) throws Exception {
-        return http.getSharedObject(AuthenticationManagerBuilder.class).userDetailsService(new CustomUserDetailsService())
-                   .passwordEncoder(passwordEncoder()).and().authenticationProvider(userProvider).build();
+        return NoOpPasswordEncoder.getInstance();
     }
 
     /**
@@ -92,12 +69,12 @@ public class SecurityConfig {
     public UserDetailsService inMemoryDetailService(){
         UserDetails user = User.builder()
                                .username("user")
-                               .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
+                               .password("{noop}test12355")
                                .roles("USER")
                                .build();
         UserDetails admin = User.builder()
                                 .username("admin")
-                                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
+                                .password("{noop}test12355")
                                 .roles("USER", "ADMIN")
                                 .build();
         return new InMemoryUserDetailsManager(user, admin);

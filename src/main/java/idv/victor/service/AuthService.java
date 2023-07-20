@@ -12,6 +12,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,7 +23,7 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private UserDetailsService userDetailsService;
 
     @Autowired
     private JWTUtils jwtUtils;
@@ -33,7 +35,8 @@ public class AuthService {
     public LoginResDTO login (LoginReqDTO loginReqDTO){
         try {
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(loginReqDTO.getUserName(), loginReqDTO.getPassword());
-            Authentication authentication = authenticationManager.authenticate(token);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(loginReqDTO.getUserName());
+            Authentication authentication = new UsernamePasswordAuthenticationToken(loginReqDTO.getUserName(),loginReqDTO.getPassword(),userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
             return LoginResDTO.builder().jwtToken(jwtUtils.createToken("member", loginReqDTO.getUserName(), 3)).build();
         }catch (AuthenticationException exception){

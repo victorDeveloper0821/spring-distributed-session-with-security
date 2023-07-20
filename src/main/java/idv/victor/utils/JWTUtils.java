@@ -27,7 +27,7 @@ public class JWTUtils {
     /**
      * JWT Secret
      */
-    @Value(value = "jwt.secret")
+    @Value("${jwt.secret}")
     private String secret ;
     /**
      * 取得 Authentication token
