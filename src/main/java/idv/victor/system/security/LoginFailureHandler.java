@@ -1,4 +1,4 @@
-package idv.victor.security;
+package idv.victor.system.security;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;

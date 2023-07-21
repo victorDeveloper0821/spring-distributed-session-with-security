@@ -1,4 +1,4 @@
-package idv.victor.security;
+package idv.victor.system.security;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.core.userdetails.UserDetails;

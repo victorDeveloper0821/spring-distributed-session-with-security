@@ -1,4 +1,4 @@
-package idv.victor.security;
+package idv.victor.system.security;
 
 import idv.victor.utils.JWTUtils;
 import io.jsonwebtoken.Claims;

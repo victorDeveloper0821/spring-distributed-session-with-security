@@ -1,7 +1,7 @@
-package idv.victor.config;
+package idv.victor.system.config;
 
-import idv.victor.security.CustomLogoutFilter;
-import idv.victor.security.JwtFilter;
+import idv.victor.system.security.CustomLogoutFilter;
+import idv.victor.system.security.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

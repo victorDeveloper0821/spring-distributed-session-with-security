@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "idv.victor")
-@EntityScan(basePackages = {"idv.victor.web.*.domain.entity","idv.victor.entity"})
+@EntityScan(basePackages = {"idv.victor.web.*.domain.entity"})
 @EnableJpaRepositories("idv.victor.repository")
 public class SpringDistributedSessionApplication {
 
