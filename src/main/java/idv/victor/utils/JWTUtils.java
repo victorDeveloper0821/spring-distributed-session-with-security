@@ -104,6 +104,7 @@ public class JWTUtils {
                          .signWith(generateSecretKey(), SignatureAlgorithm.HS256)
                          .compact();
     }
+
     /**
      * 取得secretKey
      *
@@ -113,6 +114,12 @@ public class JWTUtils {
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
+    /**
+     * 驗證 JWT 是否有效
+     */
+    public void validateToken(String token, String jti, String subject) {
+
+    }
 
 
 }

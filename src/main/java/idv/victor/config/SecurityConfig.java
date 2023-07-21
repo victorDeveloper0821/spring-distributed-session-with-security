@@ -1,25 +1,22 @@
 package idv.victor.config;
 
 import idv.victor.security.CustomLogoutFilter;
-import idv.victor.security.CustomUserDetailsService;
-import idv.victor.security.CustomUserProvider;
+import idv.victor.security.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 
 /**
@@ -30,12 +27,16 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
 public class SecurityConfig {
 
     /**
-     * AuthenticationProvider
+     * user 登出 filter
      */
-    private AuthenticationProvider userProvider;
-
     @Autowired
     private CustomLogoutFilter customLogoutFilter;
+
+    /**
+     * Jwt 驗證
+     */
+    @Autowired
+    private JwtFilter filter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -61,7 +62,11 @@ public class SecurityConfig {
             .antMatchers("/home/**").permitAll()
             .antMatchers("/auth/**").permitAll()
             .antMatchers("/dummy/**").authenticated()
-            .and().addFilterBefore(customLogoutFilter, LogoutFilter.class);
+            .and()
+            .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(customLogoutFilter, LogoutFilter.class)
+            .sessionManagement().sessionCreationPolicy(
+                    SessionCreationPolicy.STATELESS);
         return http.build();
     }
 
@@ -74,12 +79,12 @@ public class SecurityConfig {
     public UserDetailsService inMemoryDetailService(){
         UserDetails user = User.builder()
                                .username("user")
-                               .password("{noop}test12355")
+                               .password("test12355")
                                .roles("USER")
                                .build();
         UserDetails admin = User.builder()
                                 .username("admin")
-                                .password("{noop}test12355")
+                                .password("test12355")
                                 .roles("USER", "ADMIN")
                                 .build();
         return new InMemoryUserDetailsManager(user, admin);
