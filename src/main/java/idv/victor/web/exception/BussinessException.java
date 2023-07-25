@@ -1,10 +1,12 @@
 package idv.victor.web.exception;
 
 import idv.victor.web.enums.ErrorCodeEnum;
+import lombok.Getter;
 
 /**
  * 提供自定義的例外處理
  */
+@Getter
 public class BussinessException extends Exception{
 
     /**

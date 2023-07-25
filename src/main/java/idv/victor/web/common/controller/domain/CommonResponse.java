@@ -20,10 +20,16 @@ public class CommonResponse {
     /**
      * 成功/錯誤訊息
      */
-    private final String message;
+    private String message;
 
     /**
      * 資料列表
      */
     private final Object data;
+
+    public CommonResponse(Object data, boolean success, String status) {
+        this.data = data;
+        this.success = success;
+        this.status = status;
+    }
 }
