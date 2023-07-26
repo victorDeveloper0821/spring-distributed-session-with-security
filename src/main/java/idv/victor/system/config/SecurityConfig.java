@@ -70,24 +70,5 @@ public class SecurityConfig {
         return http.build();
     }
 
-    /**
-     * In memory users setting there
-     * @return
-     */
-    @Bean
-    @ConditionalOnProperty(name = "api.env", havingValue = "local")
-    public UserDetailsService inMemoryDetailService(){
-        UserDetails user = User.builder()
-                               .username("user")
-                               .password("test12355")
-                               .roles("USER")
-                               .build();
-        UserDetails admin = User.builder()
-                                .username("admin")
-                                .password("test12355")
-                                .roles("USER", "ADMIN")
-                                .build();
-        return new InMemoryUserDetailsManager(user, admin);
-    }
 
 }

@@ -12,5 +12,7 @@ public interface UserService {
 
     boolean findDuplicateUserName(String userName);
 
+    boolean findDuplicateEmail(String email);
+
     User save(User user);
 }

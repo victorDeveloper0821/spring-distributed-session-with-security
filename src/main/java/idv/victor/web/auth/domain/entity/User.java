@@ -15,7 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -49,7 +49,7 @@ public class User {
     /**
      * 身分別
      */
-    @Column(name = "memberType", nullable = false)
+    @Column(name = "membertype", nullable = false)
     private Short memberType;
 
 }

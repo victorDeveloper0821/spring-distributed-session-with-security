@@ -53,6 +53,16 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 是否有重複的 email
+     * @param email
+     * @return
+     */
+    @Override
+    public boolean findDuplicateEmail(String email) {
+        return repository.countByEmail(email) > 1;
+    }
+
+    /**
      * 儲存 or 更新 user
      *
      * @param user

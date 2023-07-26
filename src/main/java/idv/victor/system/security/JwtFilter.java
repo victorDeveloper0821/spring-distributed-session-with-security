@@ -33,7 +33,6 @@ public class JwtFilter extends OncePerRequestFilter {
     /**
      * 取得 userData
      */
-    @Autowired
     private UserDetailsService userDetailsService;
 
     /**
@@ -55,6 +54,10 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        if(request.getRequestURI().contains("/user/")){
+            filterChain.doFilter(request, response);
+        }else{
+
         try {
             // 取得 JWT 內容
             Claims claims = jwtUtils.getClaimFromRequest(request);
@@ -74,6 +77,7 @@ public class JwtFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         } catch (Exception e) {
             resolver.resolveException(request, response, null, e);
+        }
         }
 
     }

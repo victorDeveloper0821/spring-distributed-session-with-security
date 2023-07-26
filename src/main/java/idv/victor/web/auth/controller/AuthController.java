@@ -1,5 +1,6 @@
 package idv.victor.web.auth.controller;
 
+import idv.victor.web.auth.domain.dto.FirstLoginReqDTO;
 import idv.victor.web.auth.domain.dto.LoginReqDTO;
 import idv.victor.web.auth.domain.dto.LoginResDTO;
 import idv.victor.web.auth.service.AuthService;
@@ -45,6 +46,16 @@ public class AuthController {
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public CommonResponse logout(HttpServletRequest request) throws BussinessException {
         authService.logout(request);
+        return new CommonResponse(null, true, ErrorCodeEnum.A0001.getErrorCode());
+    }
+
+    /**
+     * 會員註冊 api
+     */
+    @RequestMapping(value = "/firstLogin", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResponse firstLogin(@RequestBody FirstLoginReqDTO firstLoginReqDTO) throws Exception {
+        authService.firstLogin(firstLoginReqDTO);
         return new CommonResponse(null, true, ErrorCodeEnum.A0001.getErrorCode());
     }
 }

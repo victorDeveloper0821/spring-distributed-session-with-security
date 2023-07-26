@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+    long countByEmail(String email);
     long countByUserName(@NonNull String userName);
 
     @Query("select count(u) from User u where u.firstName = :firstName and u.lastName = :lastName")
