@@ -22,7 +22,7 @@ public class User {
     /**
      * 登入帳號
      */
-    @Column(name = "userid", nullable = false)
+    @Column(name = "userid", nullable = false, unique = true)
     private String userName;
 
     /**

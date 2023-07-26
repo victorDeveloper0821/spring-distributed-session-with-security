@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean findDuplicateName(String firstName, String lastName) {
-        return repository.findDuplicateNameCount(firstName, lastName) > 1;
+        return repository.findDuplicateNameCount(firstName, lastName) >= 1;
     }
 
     /**
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean findDuplicateUserName(String userName) {
-        return repository.countByUserName(userName) > 1;
+        return repository.countByUserName(userName) >= 1;
     }
 
     /**
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean findDuplicateEmail(String email) {
-        return repository.countByEmail(email) > 1;
+        return repository.countByEmail(email) >= 1;
     }
 
     /**
