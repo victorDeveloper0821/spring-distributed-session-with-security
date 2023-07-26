@@ -4,7 +4,7 @@ import idv.victor.web.auth.domain.dto.FirstLoginReqDTO;
 import idv.victor.web.auth.domain.dto.LoginReqDTO;
 import idv.victor.web.auth.domain.dto.LoginResDTO;
 import idv.victor.web.auth.service.AuthService;
-import idv.victor.web.common.controller.domain.CommonResponse;
+import idv.victor.web.common.domain.CommonResponse;
 import idv.victor.web.enums.ErrorCodeEnum;
 import idv.victor.web.exception.BussinessException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -113,6 +113,8 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<!-- Name of Jar -->
+		<finalName>docker-demo</finalName>
 	</build>
 
 </project>

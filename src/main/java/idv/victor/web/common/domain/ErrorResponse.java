@@ -1,7 +1,8 @@
-package idv.victor.web.common.controller.domain;
+package idv.victor.web.common.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import idv.victor.web.enums.ErrorCodeEnum;
 import lombok.Builder;
 import lombok.Data;
 
@@ -26,4 +27,14 @@ public class ErrorResponse {
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Object errors;
+
+    /**
+     * 建構子
+     *
+     * @param errorCodeEnum 錯誤代碼 enum
+     */
+    public ErrorResponse (ErrorCodeEnum errorCodeEnum){
+        this.errCode = errorCodeEnum.getErrorCode();
+        this.errMsg = errorCodeEnum.getErrMsg();
+    }
 }

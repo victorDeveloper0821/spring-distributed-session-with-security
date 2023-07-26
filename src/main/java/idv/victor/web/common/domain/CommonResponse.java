@@ -1,4 +1,4 @@
-package idv.victor.web.common.controller.domain;
+package idv.victor.web.common.domain;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package idv.victor.web.common.controller;
 
-import idv.victor.web.common.controller.domain.ErrorResponse;
+import idv.victor.web.common.domain.ErrorResponse;
 import idv.victor.web.enums.ErrorCodeEnum;
 import idv.victor.web.exception.BussinessException;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +21,7 @@ public class ErrorHandleController {
      */
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<ErrorResponse> authenticationError() {
-        ErrorResponse response = ErrorResponse.builder().errCode(ErrorCodeEnum.E0001.getErrorCode())
-                                              .errMsg(ErrorCodeEnum.E0001.getErrMsg()).build();
+        ErrorResponse response = new ErrorResponse(ErrorCodeEnum.E0001);
         return ResponseEntity.status(401).body(response);
     }
 
