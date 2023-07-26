@@ -3,14 +3,13 @@ package idv.victor.web.common.domain;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import idv.victor.web.enums.ErrorCodeEnum;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 /**
  * 針對api error 的物件
  */
-@Data
-@Builder
+@Setter
+@NoArgsConstructor
 public class ErrorResponse {
     /**
      * 錯誤代碼

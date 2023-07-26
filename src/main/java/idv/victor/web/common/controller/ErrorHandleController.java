@@ -30,8 +30,9 @@ public class ErrorHandleController {
      */
     @ExceptionHandler(BussinessException.class)
     public ResponseEntity<ErrorResponse> BussinessException(BussinessException exception) {
-        ErrorResponse response =
-                ErrorResponse.builder().errCode(exception.getErrcode()).errMsg(exception.getErrMsg()).build();
+        ErrorResponse response = new ErrorResponse();
+        response.setErrCode(exception.getErrcode());
+        response.setErrMsg(exception.getErrMsg());
         return ResponseEntity.status(500).body(response);
     }
 
