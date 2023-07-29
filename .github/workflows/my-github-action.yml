@@ -23,7 +23,7 @@ jobs:
           push: false  # 是否推送映像到 Docker Hub，此處先設為 false，稍後再推送
 
       - name: Login to Docker Hub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
